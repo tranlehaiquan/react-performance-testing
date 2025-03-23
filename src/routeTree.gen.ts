@@ -11,11 +11,18 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as PaginationListImport } from './routes/pagination-list'
 import { Route as LazyListImport } from './routes/lazy-list'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const PaginationListRoute = PaginationListImport.update({
+  id: '/pagination-list',
+  path: '/pagination-list',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const LazyListRoute = LazyListImport.update({
   id: '/lazy-list',
@@ -60,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LazyListImport
       parentRoute: typeof rootRoute
     }
+    '/pagination-list': {
+      id: '/pagination-list'
+      path: '/pagination-list'
+      fullPath: '/pagination-list'
+      preLoaderRoute: typeof PaginationListImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -69,12 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/lazy-list': typeof LazyListRoute
+  '/pagination-list': typeof PaginationListRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/lazy-list': typeof LazyListRoute
+  '/pagination-list': typeof PaginationListRoute
 }
 
 export interface FileRoutesById {
@@ -82,14 +98,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/lazy-list': typeof LazyListRoute
+  '/pagination-list': typeof PaginationListRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/lazy-list'
+  fullPaths: '/' | '/about' | '/lazy-list' | '/pagination-list'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/lazy-list'
-  id: '__root__' | '/' | '/about' | '/lazy-list'
+  to: '/' | '/about' | '/lazy-list' | '/pagination-list'
+  id: '__root__' | '/' | '/about' | '/lazy-list' | '/pagination-list'
   fileRoutesById: FileRoutesById
 }
 
@@ -97,12 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   LazyListRoute: typeof LazyListRoute
+  PaginationListRoute: typeof PaginationListRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   LazyListRoute: LazyListRoute,
+  PaginationListRoute: PaginationListRoute,
 }
 
 export const routeTree = rootRoute
@@ -117,7 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/lazy-list"
+        "/lazy-list",
+        "/pagination-list"
       ]
     },
     "/": {
@@ -128,6 +148,9 @@ export const routeTree = rootRoute
     },
     "/lazy-list": {
       "filePath": "lazy-list.tsx"
+    },
+    "/pagination-list": {
+      "filePath": "pagination-list.tsx"
     }
   }
 }

@@ -1,20 +1,18 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useTransition } from "react";
 import AlertDemoMemo, { AlertDemo } from "@/components/SomeAlert";
 import { AddItem } from "@/AddItem";
 
 function ListAlert({ memo = false }: { memo?: boolean }) {
-  const [list, setList] = useState<
-    {
-      id: number;
-    }[]
-  >([]);
+  const [list, setList] = useState<{ id: number }[]>([]);
+  const [isPending, startTransition] = useTransition();
 
-  // Using useCallback to prevent unnecessary re-renders
   const handleClickAdd = useCallback((value: number) => {
     const newItem = new Array(value)
       .fill(0)
-      .map((_, i) => ({ id: Math.random() * 1000 + i }));
-    setList((prev) => [...newItem, ...prev]);
+      .map((_, i) => ({ id: Math.random() * 100000 + i }));
+    startTransition(() => {
+      setList((prev) => [...newItem, ...prev]);
+    });
   }, []);
 
   return (
@@ -22,7 +20,8 @@ function ListAlert({ memo = false }: { memo?: boolean }) {
       <div className="flex-none">
         <AddItem handleClickAdd={handleClickAdd} />
         <p className="mb-2">
-          Rendered: <strong>{list.length}</strong> alert(s)
+          Total items: <strong>{list.length}</strong>
+          {isPending && " (rendering...)"}
         </p>
       </div>
 
