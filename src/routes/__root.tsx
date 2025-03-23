@@ -11,6 +11,9 @@ export const Route = createRootRoute({
         <Link to="/lazy-list" className="[&.active]:font-bold">
           Lazy list
         </Link>
+        <Link to="/about" className="[&.active]:font-bold">
+          About
+        </Link>
       </div>
       <hr />
       <Outlet />

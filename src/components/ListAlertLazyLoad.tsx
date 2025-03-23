@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import AlertDemoMemo, { AlertDemo } from "@/SomeAlert";
+import AlertDemoMemo, { AlertDemo } from "@/components/SomeAlert";
 import { AddItem } from "@/AddItem";
 import { FixedSizeList } from "react-window";
 

@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import AlertDemoMemo, { AlertDemo } from "@/SomeAlert";
+import AlertDemoMemo, { AlertDemo } from "@/components/SomeAlert";
 import { AddItem } from "@/AddItem";
 
 function ListAlert({ memo = false }: { memo?: boolean }) {
