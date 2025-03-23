@@ -1,54 +1,57 @@
-# React + TypeScript + Vite
+# Vite React TypeScript Demo Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A demonstration project showcasing React performance optimization techniques and modern routing using Vite as the build tool.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [React](https://react.dev/) - JavaScript library for building user interfaces
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- [TanStack Router](https://tanstack.com/router) - Modern and scalable routing for React
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 
-## Expanding the ESLint configuration
+## Project Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Performance Comparison**: Demonstrates React.memo usage with a side-by-side comparison
+  - Left side: Component without memo optimization
+  - Right side: Component with memo optimization
+- **Modern Routing**: Implements TanStack Router for type-safe routing
+- **TypeScript**: Full TypeScript support for better development experience
+- **Responsive Layout**: Uses Tailwind CSS grid system for responsive design
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+1. Clone the repository
+```bash
+git clone https://github.com/tranlehaiquan/react-performance-testing
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Install dependencies
+```bash
+pnpm i
 ```
+
+3. Run the development server
+```bash
+pnpm dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Project Structure
+
+```
+vite-react-ts/
+├── src/
+│   ├── components/
+│   │   └── ListAlert.tsx     # Demo component for memo comparison
+│   ├── App.tsx              # Main application component
+│   ├── router.tsx           # Router configuration
+│   └── routeTree.gen.ts     # Generated route tree
+├── index.html
+└── package.json
+```
+
+## License
+
+MIT
