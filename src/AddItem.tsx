@@ -7,7 +7,7 @@ export function AddItem({ handleClickAdd }: { handleClickAdd: (n: number) => voi
 
   return (
     <div className="flex gap-2 mb-4">
-      <Input value={value} onChange={(e) => setValue(Number(e.target.value))} />
+      <Input value={value} onChange={(e) => setValue(Number(e.target.value))} type="number" />
       <Button
         onClick={() => {
           handleClickAdd(value);

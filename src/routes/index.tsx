@@ -1,6 +1,11 @@
-import ListAlert from "./components/ListAlert";
+import ListAlert from "@/components/ListAlert";
+import { createFileRoute } from "@tanstack/react-router";
 
-function App() {
+export const Route = createFileRoute("/")({
+  component: RouteComponent,
+});
+
+function RouteComponent() {
   return (
     <div className="grid grid-cols-2 gap-4 min-h-screen">
       <div>
@@ -14,5 +19,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
