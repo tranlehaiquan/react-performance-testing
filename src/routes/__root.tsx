@@ -14,6 +14,9 @@ export const Route = createRootRoute({
         <Link to="/pagination-list" className="[&.active]:text-blue-500">
           Pagination list
         </Link>
+        <Link to="/information" className="[&.active]:text-blue-500">
+          info
+        </Link>
       </div>
       <hr />
       <div className="px-2">
