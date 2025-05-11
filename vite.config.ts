@@ -8,9 +8,6 @@ import vercel from "vite-plugin-vercel";
 const ENABLE_OPTIMISATIONS = true;
 const ReactCompilerConfig = {};
 
-const ENABLE_OPTIMISATIONS = true;
-const ReactCompilerConfig = {};
-
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
