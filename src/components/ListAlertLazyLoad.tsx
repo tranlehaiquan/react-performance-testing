@@ -23,9 +23,9 @@ function ListAlertLazyLoad({ memo = false }: { memo?: boolean }) {
     return (
       <div style={style}>
         {memo ? (
-          <AlertDemoMemo content={item.id.toString()} />
+          <AlertDemoMemo content={item.id.toString()} id={item.id} />
         ) : (
-          <AlertDemo content={item.id.toString()} />
+          <AlertDemo content={item.id.toString()} id={item.id} />
         )}
       </div>
     );

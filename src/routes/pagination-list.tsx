@@ -16,12 +16,10 @@ function ListAlertPagination() {
   const handleClickAdd = useCallback(
     (value: number) => {
       let totalItems = list.length + value;
-      const newItem = new Array(value)
-        .fill(0)
-        .map((_, i) => ({
-          id: Math.random() * 1000 + i,
-          title: `Item ${--totalItems}`,
-        }));
+      const newItem = new Array(value).fill(0).map((_, i) => ({
+        id: Math.random() * 1000 + i,
+        title: `Item ${--totalItems}`,
+      }));
       setList((prev) => [...newItem, ...prev]);
       setCurrentPage(1);
     },
@@ -62,7 +60,12 @@ function ListAlertPagination() {
 
       <div className="flex-grow overflow-y-auto grid gap-2 content-start">
         {currentItems.map((_) => (
-          <AlertDemoMemo key={_.id} content={_.id.toString()} title={_.title} />
+          <AlertDemoMemo
+            key={_.id}
+            content={_.id.toString()}
+            title={_.title}
+            id={_.id}
+          />
         ))}
       </div>
     </div>
