@@ -1,6 +1,13 @@
-# Vite React TypeScript Demo Project
+# About this project
 
-A demonstration project showcasing React performance optimization techniques and modern routing using Vite as the build tool.
+This project is a demonstration of performance testing in React, or can just can call it my experiment React project (pet project).
+
+## Notes, for my fish brain:
+
+- Use react-scan for easier detecting performance issues
+- Use React compiler for automatically generating memoized components
+- Split component into smaller component so React Compiler can memory it, or we can memory it, avoid render the whole component
+- With render a huge list component, or a list slow component we can Lazy load list, pagination, using some lib react-window
 
 ## Tech Stack
 
@@ -22,16 +29,19 @@ A demonstration project showcasing React performance optimization techniques and
 ## Getting Started
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/tranlehaiquan/react-performance-testing
 ```
 
 2. Install dependencies
+
 ```bash
 pnpm i
 ```
 
 3. Run the development server
+
 ```bash
 pnpm dev
 ```
