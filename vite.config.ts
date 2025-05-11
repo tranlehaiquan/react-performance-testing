@@ -3,6 +3,10 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import vercel from "vite-plugin-vercel";
+
+const ENABLE_OPTIMISATIONS = true;
+const ReactCompilerConfig = {};
 
 const ENABLE_OPTIMISATIONS = true;
 const ReactCompilerConfig = {};
@@ -19,6 +23,7 @@ export default defineConfig({
       },
     }),
     tailwindcss(),
+    vercel(),
   ],
   resolve: {
     alias: {
