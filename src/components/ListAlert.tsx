@@ -1,4 +1,4 @@
-import { useState, useCallback, useTransition } from "react";
+import { useState, useTransition } from "react";
 import AlertDemoMemo, { AlertDemo } from "@/components/SomeAlert";
 import { AddItem } from "@/AddItem";
 
@@ -6,7 +6,7 @@ function ListAlert({ memo = false }: { memo?: boolean }) {
   const [list, setList] = useState<{ id: number; title: string }[]>([]);
   const [isPending, startTransition] = useTransition();
 
-  const handleClickAdd = useCallback((value: number) => {
+  const handleClickAdd = (value: number) => {
     const newItem = new Array(value).fill(0).map((_, i) => ({
       id: Math.random() * 100000 + i,
       title: `Item ${Math.random() * 100000 + i}`,
@@ -14,20 +14,17 @@ function ListAlert({ memo = false }: { memo?: boolean }) {
     startTransition(() => {
       setList((prev) => [...newItem, ...prev]);
     });
-  }, []);
+  };
 
   // NOTE:
   // when update the item, ListAlert will re-render all items
   // new handleUpdate will be created every time and memo in AlertDemoMemo will not work
   // so it why we use useCallback to memoize the function
-  const handleUpdate = useCallback(
-    ({ id, title }: { id?: number; title: string }) => {
-      setList((prev) =>
-        prev.map((item) => (item.id === id ? { ...item, title } : item))
-      );
-    },
-    []
-  );
+  const handleUpdate = ({ id, title }: { id?: number; title: string }) => {
+    setList((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, title } : item))
+    );
+  };
 
   return (
     <div className="flex flex-col w-full h-screen p-2">
