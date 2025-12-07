@@ -21,7 +21,7 @@ export function AddItem({
   ];
 
   return (
-    <div className="flex flex-col gap-2 mb-4">
+    <div className="flex flex-col gap-1 mb-4">
       <div className="flex gap-2 w-full">
         <Input
           value={value}
@@ -38,7 +38,7 @@ export function AddItem({
         </Button>
       </div>
 
-      <div className="flex flex-wrap gap-2 mt-1">
+      <div className="flex flex-wrap gap-1 mt-1">
         {presetValues.map((preset) => (
           <Button
             key={preset.amount}

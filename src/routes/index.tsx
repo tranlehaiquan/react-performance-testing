@@ -11,7 +11,7 @@ function RouteComponent() {
 
   return (
     <div>
-      <label className="inline-flex items-center gap-2 m-2">
+      <label className="inline-flex items-center gap-1 m-2">
         <input
           type="checkbox"
           checked={enabledMemo}
