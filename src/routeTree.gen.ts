@@ -8,90 +8,38 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as PaginationListRouteImport } from './routes/pagination-list'
+import { Route as LazyListRouteImport } from './routes/lazy-list'
+import { Route as InformationRouteImport } from './routes/information'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as PaginationListImport } from './routes/pagination-list'
-import { Route as LazyListImport } from './routes/lazy-list'
-import { Route as InformationImport } from './routes/information'
-import { Route as AboutImport } from './routes/about'
-import { Route as IndexImport } from './routes/index'
-
-// Create/Update Routes
-
-const PaginationListRoute = PaginationListImport.update({
+const PaginationListRoute = PaginationListRouteImport.update({
   id: '/pagination-list',
   path: '/pagination-list',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const LazyListRoute = LazyListImport.update({
+const LazyListRoute = LazyListRouteImport.update({
   id: '/lazy-list',
   path: '/lazy-list',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const InformationRoute = InformationImport.update({
+const InformationRoute = InformationRouteImport.update({
   id: '/information',
   path: '/information',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AboutRoute = AboutImport.update({
+const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/information': {
-      id: '/information'
-      path: '/information'
-      fullPath: '/information'
-      preLoaderRoute: typeof InformationImport
-      parentRoute: typeof rootRoute
-    }
-    '/lazy-list': {
-      id: '/lazy-list'
-      path: '/lazy-list'
-      fullPath: '/lazy-list'
-      preLoaderRoute: typeof LazyListImport
-      parentRoute: typeof rootRoute
-    }
-    '/pagination-list': {
-      id: '/pagination-list'
-      path: '/pagination-list'
-      fullPath: '/pagination-list'
-      preLoaderRoute: typeof PaginationListImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -100,7 +48,6 @@ export interface FileRoutesByFullPath {
   '/lazy-list': typeof LazyListRoute
   '/pagination-list': typeof PaginationListRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
@@ -108,16 +55,14 @@ export interface FileRoutesByTo {
   '/lazy-list': typeof LazyListRoute
   '/pagination-list': typeof PaginationListRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/information': typeof InformationRoute
   '/lazy-list': typeof LazyListRoute
   '/pagination-list': typeof PaginationListRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/about' | '/information' | '/lazy-list' | '/pagination-list'
@@ -132,13 +77,52 @@ export interface FileRouteTypes {
     | '/pagination-list'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   InformationRoute: typeof InformationRoute
   LazyListRoute: typeof LazyListRoute
   PaginationListRoute: typeof PaginationListRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/pagination-list': {
+      id: '/pagination-list'
+      path: '/pagination-list'
+      fullPath: '/pagination-list'
+      preLoaderRoute: typeof PaginationListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lazy-list': {
+      id: '/lazy-list'
+      path: '/lazy-list'
+      fullPath: '/lazy-list'
+      preLoaderRoute: typeof LazyListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/information': {
+      id: '/information'
+      path: '/information'
+      fullPath: '/information'
+      preLoaderRoute: typeof InformationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -148,39 +132,6 @@ const rootRouteChildren: RootRouteChildren = {
   LazyListRoute: LazyListRoute,
   PaginationListRoute: PaginationListRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/about",
-        "/information",
-        "/lazy-list",
-        "/pagination-list"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/about": {
-      "filePath": "about.tsx"
-    },
-    "/information": {
-      "filePath": "information.tsx"
-    },
-    "/lazy-list": {
-      "filePath": "lazy-list.tsx"
-    },
-    "/pagination-list": {
-      "filePath": "pagination-list.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
