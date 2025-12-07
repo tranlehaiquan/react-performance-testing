@@ -1,7 +1,7 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useTransition } from "react";
 import AlertDemoMemo, { AlertDemo } from "@/components/SomeAlert";
 import { AddItem } from "@/AddItem";
-import { List, RowComponentProps, useDynamicRowHeight } from "react-window";
+import { List, RowComponentProps } from "react-window";
 
 const ItemRenderer = ({
   index,
@@ -24,38 +24,38 @@ const ItemRenderer = ({
   );
 };
 
-function ListAlertLazyLoad({ memo = false }: { memo?: boolean }) {
+function ListAlertLazyLoad({ memo = true }: { memo?: boolean }) {
   const [list, setList] = useState<
     {
       id: number;
     }[]
   >([]);
+  const [isPending, startTransition] = useTransition();
 
   // Using useCallback to prevent unnecessary re-renders
   const handleClickAdd = useCallback((value: number) => {
     const newItem = new Array(value)
       .fill(0)
       .map((_, i) => ({ id: Math.random() * 1000 + i }));
-    setList((prev) => [...newItem, ...prev]);
+    startTransition(() => {
+      setList((prev) => [...newItem, ...prev]);
+    });
   }, []);
-
-  const rowHeight = useDynamicRowHeight({
-    defaultRowHeight: 50,
-  });
 
   return (
     <div className="flex flex-col w-full h-screen p-2">
       <div className="flex-none">
         <AddItem handleClickAdd={handleClickAdd} />
         <p className="mb-2">
-          Rendered: <strong>{list.length}</strong> alert(s)
+          Rendered: <strong>{list.length}</strong> alert(s){" "}
+          {isPending && " (rendering...)"}
         </p>
       </div>
 
       <List
         rowComponent={ItemRenderer}
         rowCount={list.length}
-        rowHeight={rowHeight}
+        rowHeight={75}
         rowProps={{ list, memo }}
       />
     </div>

@@ -36,7 +36,7 @@ function ListAlert({ memo = false }: { memo?: boolean }) {
         </p>
       </div>
 
-      <div className="flex-grow overflow-y-auto grid gap-2 content-start">
+      <div className="overflow-y-auto grid gap-2 content-start">
         {list.map((_) =>
           memo ? (
             <AlertDemoMemo
