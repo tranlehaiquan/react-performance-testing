@@ -1,7 +1,28 @@
 import { useState, useCallback } from "react";
 import AlertDemoMemo, { AlertDemo } from "@/components/SomeAlert";
 import { AddItem } from "@/AddItem";
-import { FixedSizeList } from "react-window";
+import { List, RowComponentProps, useDynamicRowHeight } from "react-window";
+
+const ItemRenderer = ({
+  index,
+  style,
+  list,
+  memo,
+}: RowComponentProps<{
+  list: any[];
+  memo: boolean;
+}>) => {
+  const item = list[index];
+  return (
+    <div style={style}>
+      {memo ? (
+        <AlertDemoMemo content={item.id.toString()} id={item.id} />
+      ) : (
+        <AlertDemo content={item.id.toString()} id={item.id} />
+      )}
+    </div>
+  );
+};
 
 function ListAlertLazyLoad({ memo = false }: { memo?: boolean }) {
   const [list, setList] = useState<
@@ -18,18 +39,9 @@ function ListAlertLazyLoad({ memo = false }: { memo?: boolean }) {
     setList((prev) => [...newItem, ...prev]);
   }, []);
 
-  const ItemRenderer = ({ index, style }: { index: number; style: any }) => {
-    const item = list[index];
-    return (
-      <div style={style}>
-        {memo ? (
-          <AlertDemoMemo content={item.id.toString()} id={item.id} />
-        ) : (
-          <AlertDemo content={item.id.toString()} id={item.id} />
-        )}
-      </div>
-    );
-  };
+  const rowHeight = useDynamicRowHeight({
+    defaultRowHeight: 50,
+  });
 
   return (
     <div className="flex flex-col w-full h-screen p-2">
@@ -40,17 +52,12 @@ function ListAlertLazyLoad({ memo = false }: { memo?: boolean }) {
         </p>
       </div>
 
-      <div className="flex-grow overflow-y-auto grid gap-2 content-start">
-        <FixedSizeList
-          height={800}
-          width="100%"
-          itemCount={list.length}
-          itemSize={80}
-          overscanCount={5}
-        >
-          {ItemRenderer}
-        </FixedSizeList>
-      </div>
+      <List
+        rowComponent={ItemRenderer}
+        rowCount={list.length}
+        rowHeight={rowHeight}
+        rowProps={{ list, memo }}
+      />
     </div>
   );
 }
